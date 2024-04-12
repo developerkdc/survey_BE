@@ -7,7 +7,6 @@ import {
   getRatingAndReviewsUser,
 } from "../Controller/RatingAndReviews.controller.js";
 import { MulterFunction } from "../Utils/MulterFunction.js";
-import authMiddleware from "../Utils/auth.js";
 const RatingAndReviewsRouter = express.Router();
 
 RatingAndReviewsRouter.route("/").post( addRatingAndReviews).get(getRatingAndReviews);

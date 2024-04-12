@@ -1,14 +1,15 @@
 import mongoose from "mongoose";
-import mallModel from "../Model/mall.model.js";
+import mallModel from "../Model/survey.model.js";
 import jwt from "jsonwebtoken";
+import surveyModel from "../Model/survey.model.js";
 
 
-export const getMall = async (req, res) => {
+export const getSurvey = async (req, res) => {
   try {
-    const mall = await mallModel.find();
+    const survey = await surveyModel.find();
     return res.status(200).json({
       status: "success",
-      mall,
+      survey,
     });
   } catch (error) {
     return res.status(500).json({
@@ -18,12 +19,26 @@ export const getMall = async (req, res) => {
   }
 };
 
-export const addMall = async (req, res) => {
+// export const addMall = async (req, res) => {
+//   try {
+//     const mallAdd = await mallModel.create(req.body);
+//     return res.status(200).json({
+//       status: "created",
+//       mall: mallAdd,
+//     });
+//   } catch (error) {
+//     return res.status(500).json({
+//       status: "failed",
+//       message: error.message,
+//     });
+//   }
+// };
+export const addSurvey = async (req, res) => {
   try {
-    const mallAdd = await mallModel.create(req.body);
+    const SurveyAdd = await surveyModel.create(req.body);
     return res.status(200).json({
       status: "created",
-      mall: mallAdd,
+      survey: SurveyAdd,
     });
   } catch (error) {
     return res.status(500).json({
@@ -33,10 +48,31 @@ export const addMall = async (req, res) => {
   }
 };
 
-export const updateMall = async (req, res) => {
+// export const updateMall = async (req, res) => {
+//   try {
+//     const { id } = req.params;
+//     const updateMall = await mallModel.updateOne(
+//       { _id: id },
+//       {
+//         $set: req.body,
+//       }
+//     );
+
+//     return res.status(200).json({
+//       status: "updated",
+//       mall: updateMall,
+//     });
+//   } catch (error) {
+//     return res.status(500).json({
+//       status: "failed",
+//       message: error.message,
+//     });
+//   }
+// };
+export const updateSurvey = async (req, res) => {
   try {
     const { id } = req.params;
-    const updateMall = await mallModel.updateOne(
+    const updateSurvey = await surveyModel.updateOne(
       { _id: id },
       {
         $set: req.body,
@@ -45,7 +81,7 @@ export const updateMall = async (req, res) => {
 
     return res.status(200).json({
       status: "updated",
-      mall: updateMall,
+      survey: updateSurvey,
     });
   } catch (error) {
     return res.status(500).json({
@@ -55,10 +91,10 @@ export const updateMall = async (req, res) => {
   }
 };
 
-export const deleteMall = async (req, res) => {
+export const deleteSurvey = async (req, res) => {
   try {
     const { id } = req.params;
-    const deleteMall = await mallModel.deleteOne({ _id: id });
+    const deleteMall = await surveyModel.deleteOne({ _id: id });
 
     return res.status(200).json({
       status: "deleted",
@@ -74,14 +110,15 @@ export const deleteMall = async (req, res) => {
 
 export const GetMall = async (req, res) => {
   try {
+    console.log("test")
     const page = parseInt(req.query.page) || 1;
     const limit = 10;
     const skip = (page - 1) * limit;
 
-    const { sortField = "mall_name", sortOrder = "desc", search, id } = req.query;
+    const { sortField = "survey_name", sortOrder = "desc", search, id } = req.query;
 
     if (id) {
-      const mall = await mallModel.findById(id);
+      const survey = await surveyModel.findById(id);
 
       if (!mall) {
         return res.status(400).json({
@@ -93,7 +130,7 @@ export const GetMall = async (req, res) => {
 
       return res.status(200).json({
         status: true,
-        data: mall,
+        data: survey,
         message: "Fetched successfully",
       });
     }
@@ -107,11 +144,11 @@ export const GetMall = async (req, res) => {
       searchQuery = {
         ...searchQuery,
         $or: [
-          { first_name: searchRegex },
-          { last_name: searchRegex },
-          { email_id: searchRegex },
-          { mobile_no: searchRegex },
-          { mall_name: searchRegex },
+          // { first_name: searchRegex },
+          // { last_name: searchRegex },
+          // { email_id: searchRegex },
+          // { mobile_no: searchRegex },
+          { survey_name: searchRegex },
         ],
       };
     }

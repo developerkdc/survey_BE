@@ -1,6 +1,5 @@
 import mongoose from "mongoose";
 import RatingAndReviewsModel from "../Model/RatingAndReviews.model.js";
-import mallModel from "../Model/mall.model.js";
 import questionsForProductModel from "../Model/QuestionFrame.model.js";
 
 // export const addRatingAndReviews = async (req,res)=>{
