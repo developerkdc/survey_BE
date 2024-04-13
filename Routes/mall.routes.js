@@ -8,3 +8,4 @@ mallRouter.route("/:id").patch(UpdateUser).delete(deleteMall);
 mallRouter.route("/login").post(LoginUser);
 
 export default mallRouter;
+    

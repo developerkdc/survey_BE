@@ -63,7 +63,7 @@ export const addUser = async (req, res, cloudinaryUrl) => {
           "user.gender": req.body.gender,
           "user.dob": req.body.dob,
           "user.profession": req.body.profession,
-          "user.bill": cloudinaryUrl || [],
+          "user.bill": cloudinaryUrl || "",
           "user.meta_data": metaData,
         },
       },
